@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# SQLite database
+db.sqlite3
+
+# VS Code settings
+.vscode/
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environment
+env/
+venv/
+
+# Logs
+*.log
+
+# IDEs
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+.coverage
+
+# pytest
+.pytest_cache/
+
+# Static/media files (optional if not managed by Git)
+staticfiles/
+media/
+
+# Node/npm (if using React or frontend inside)
+node_modules/
