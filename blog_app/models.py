@@ -1,9 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -11,10 +15,9 @@ class Post(models.Model):
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    # Add extra fields (e.g., phone_number, profile_pic)
 
-    USERNAME_FIELD = 'email'  # Login with email instead of username
-    REQUIRED_FIELDS = ['username']  # Username still required but not for login
+    USERNAME_FIELD = 'email'  
+    REQUIRED_FIELDS = ['username']  
 
     def __str__(self):
         return self.email

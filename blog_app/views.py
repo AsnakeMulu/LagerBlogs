@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
 from .models import Post
+from .permissions import IsOwnerOrReadOnly
 from .serializers import PostSerializer, UserRegisterSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
@@ -9,7 +10,10 @@ from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticate
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
