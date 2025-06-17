@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,8 +60,15 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
-AUTH_USER_MODEL = 'blog_app.User'
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Default: 5 minutes (short for security)
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),  # Default: 1 day
+    'ROTATE_REFRESH_TOKENS': True,  # Issues new refresh token on refresh
+    'BLACKLIST_AFTER_ROTATION': True,  # Invalidates old refresh tokens
+}
+
 ROOT_URLCONF = 'lager_blogs.urls'
+AUTH_USER_MODEL = 'blog_app.User'
 
 TEMPLATES = [
     {
