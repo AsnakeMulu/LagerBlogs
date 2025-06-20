@@ -5,9 +5,18 @@ from .models import Post, Comment, User
 # User = get_user_model()
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField()
+
+    def get_author(self, obj):
+        return {
+            "id": obj.author.id,
+            "username": obj.author.username,
+            "email": obj.author.email,
+        }
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'title', 'caption', 'slug', 'content', 'created_at', 'author']
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

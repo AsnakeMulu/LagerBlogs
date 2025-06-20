@@ -40,6 +40,17 @@ class CommentListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        post_id = self.request.query_params.get("post")
+        if post_id:
+            return Comment.objects.filter(post_id=post_id).order_by("-created_at")
+        return Comment.objects.none()
+    
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
+
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)  
 
