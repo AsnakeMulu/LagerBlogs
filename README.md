@@ -4,11 +4,12 @@ A simple blog backend built using **Django REST Framework**. This project provid
 
 ## Features
 
+- Login and Registration
 - Create new blog posts
 - View a list of all posts
 - View details of a single post
-- Update existing posts
-- Delete posts
+- comment on existing posts
+- Delete your own posts and comments
 - RESTful API with browsable interface
 
 ## Tech Stack
