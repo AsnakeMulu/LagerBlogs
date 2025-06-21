@@ -1,8 +1,5 @@
 from rest_framework import serializers
 from .models import Post, Comment, User
-# from django.contrib.auth import get_user_model
-
-# User = get_user_model()
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField()
@@ -34,7 +31,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
     
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')  # Show username, not ID
+    author = serializers.ReadOnlyField(source='author.username')  
     post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
 
     class Meta:

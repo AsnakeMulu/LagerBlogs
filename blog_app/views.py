@@ -7,9 +7,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import PermissionDenied
-# from django.contrib.auth import get_user_model
-
-# User = get_user_model()
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -63,5 +60,3 @@ class CommentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         super().check_object_permissions(request, obj)
         if obj.author != request.user:
             raise PermissionDenied("You do not own this comment.")
-    # def get_queryset(self):
-    #     return Comment.objects.filter(author=self.request.user)
